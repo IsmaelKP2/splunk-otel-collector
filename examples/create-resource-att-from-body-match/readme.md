@@ -1,12 +1,10 @@
-# Associating a sourcetype with a log record
+# Create a resource attribute from a body match 
 
-This example showcases how the collector can collect data from files and send it to Splunk Enterprise, associating with each source a different sourcetype.
-
-[A source type is a default field that identifies the structure of an event. A source type determines how Splunk Enterprise formats the data during the indexing process.](https://docs.splunk.com/Splexicon:Sourcetype)
+This example showcases how the collector can collect data from files and send it to Splunk Enterprise. A copy of the raw output is sent to a file in the otelcollector accessible with the command `docker-compose exec otelcollector cat /foo` . The example shows how you can create a resource attributes (resource scope) from a body match 
 
 The example runs as a Docker Compose deployment. The collector can be configured to send logs to Splunk Enterprise.
 
-It creates three pipelines, each with its own filelog receiver and resource processor. Each resource processor sets a `com.splunk.sourcetype` record attribute to a different value, which are then interpreted by the Splunk HEC exporter as their source type.
+It creates a pipeline, with its own filelog receiver and transform processor. The transform processor in the log context set a new custom_field resource attributes and sets its value to a string that matches the string `logging1` in the body.
 
 Splunk is configured to receive data from the OpenTelemetry Collector using the HTTP Event collector. To learn more about HEC, visit [our guide](https://dev.splunk.com/enterprise/docs/dataapps/httpeventcollector/).
 
@@ -21,9 +19,8 @@ Once logged in, visit the [search application](http://localhost:18000/en-US/app/
 
 You can query the logs index with `index=logs`.
 
-![](different-sourcetypes.png)
 
-output
+**foo output**
 
 ```
 {
