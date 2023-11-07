@@ -1,4 +1,4 @@
-# Associating a sourcetype with a log record
+# mergemaps extractpatterns firstwordseen
 
 This example showcases how the collector can collect data from files and send it to Splunk Enterprise, associating with each source a different sourcetype.
 
