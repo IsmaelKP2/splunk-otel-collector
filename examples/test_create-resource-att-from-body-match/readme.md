@@ -1,6 +1,6 @@
 # Create a resource attribute from a body match 
 
-This example showcases how the collector can collect data from files and send it to Splunk Enterprise. A copy of the raw output is sent to a file in the otelcollector accessible with the command `docker-compose exec otelcollector cat /foo` . The example shows how you can create a resource attributes (resource scope) from a body match 
+This example showcases how the collector can collect data from files and send it to Splunk Enterprise. A copy of the raw output is sent to a file in the otelcollector accessible through `ls foo/filexport` . The example shows how you can create a resource attributes (resource scope) from a body match 
 
 The example runs as a Docker Compose deployment. The collector can be configured to send logs to Splunk Enterprise.
 
