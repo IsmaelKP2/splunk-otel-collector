@@ -1,6 +1,12 @@
-# set extractpattern firstwordseen
+# Create a resource attribute from an extractpatterns with set
 
-This example showcases how the collector can collect data from files and send it to Splunk Enterprise, associating with each source a different sourcetype.
+This example showcases how the collector can collect data from files and send it to Splunk Enterprise. A copy of the raw output is sent to a file in the otelcollector accessible with the command `ls foo/file_export` . The example shows how you can create a resource attributes (resource scope) from a body match 
+
+The example runs as a Docker Compose deployment. The collector can be configured to send logs to Splunk Enterprise.
+
+It creates a pipeline, with its own filelog receiver and transform processor. The transform processor in the log context set a new custom_field resource attributes and sets its value to a string that matches the string `logging1` in the body.
+
+Note that the output shows we created a `kvlistValue` in the structure of the example compare the output with the merge maps examples.
 
 [A source type is a default field that identifies the structure of an event. A source type determines how Splunk Enterprise formats the data during the indexing process.](https://docs.splunk.com/Splexicon:Sourcetype)
 

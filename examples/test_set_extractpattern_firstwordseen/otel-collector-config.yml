@@ -9,27 +9,14 @@ processors:
       - key: com.splunk.sourcetype
         value: "sourcetype1"
         action: upsert
-  resource/two:
-    attributes:
-      - key: com.splunk.sourcetype
-        value: "sourcetype2"
-        action: upsert
-  resource/three:
-    attributes:
-      - key: com.splunk.sourcetype
-        value: "sourcetype3"
-        action: upsert
   transform/test:
     log_statements:
       - context: log
         statements:
           - set(resource.attributes["custom_field"], ExtractPatterns(body, "(?P<firstwordseen> \\w+ )") )
 receivers:
-    filelog/twofile:
-      include: [ /output/file2.log ]
-    filelog/threefolder:
-      include: [ /output3/*.log ]
-
+    filelog/onefile:
+      include: [ /output/file.log ]
 exporters:
     splunk_hec/logs:
         # Splunk HTTP Event Collector token.
@@ -71,11 +58,3 @@ service:
         receivers: [ filelog/onefile ]
         processors: [ batch, resource/one, transform/test]
         exporters: [ splunk_hec/logs,file/no_rotation ]
-      logs/two:
-        receivers: [ filelog/twofile ]
-        processors: [ batch, resource/two ]
-        exporters: [ splunk_hec/logs ]
-      logs/three:
-        receivers: [ filelog/threefolder ]
-        processors: [ batch, resource/three ]
-        exporters: [ splunk_hec/logs ]
